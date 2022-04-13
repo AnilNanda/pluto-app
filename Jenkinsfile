@@ -15,7 +15,7 @@ pipeline {
             branch: 'main'
             }
         }
-        stage{
+        stage('Install pip requirements'){
             steps{
                 script{
                     sh "pip3 install -r requirements.txt"
