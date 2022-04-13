@@ -1,8 +1,7 @@
-FROM python:3.11.0a7-slim
+FROM python:latest
 LABEL maintainer="Project Pluto"
 
 WORKDIR /usr/src/app
-RUN pip install --upgrade pip; pip install wheel
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
