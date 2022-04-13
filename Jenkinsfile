@@ -15,19 +15,27 @@ pipeline {
             branch: 'main'
             }
         }
-        stage('Snyk testing') {
-      steps {
-        echo 'Snyk vulnerability check...'
-        snykSecurity(
-          snykInstallation: 'SnykLatest',
-          snykTokenId: 'snyk'
-        )
-      }
-    }
+    //     stage('Snyk testing') {
+    //   steps {
+    //     echo 'Snyk vulnerability check...'
+    //     snykSecurity(
+    //       snykInstallation: 'SnykLatest',
+    //       snykTokenId: 'snyk'
+    //     )
+    //   }
+    // }
         stage('Package image'){
             steps{
                 script{
                 docker.build("${params.ECR_REPO_NAME}:${env.BUILD_ID}")
+		  sh "echo Docker build completed successfully"
+            }
+            }
+        }
+        stage('Trivy scan image'){
+            steps{
+                script{
+                    sh "trivy ${params.ECR_REPO_NAME}:${env.BUILD_ID}"
 		  sh "echo Docker build completed successfully"
             }
             }
