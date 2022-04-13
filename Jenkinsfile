@@ -20,7 +20,7 @@ pipeline {
         echo 'Snyk vulnerability check...'
         snykSecurity(
           snykInstallation: 'SnykLatest',
-          snykTokenId: 'snyk'.
+          snykTokenId: 'snyk',
           additionalArguments: "--file=requirements.txt --command=python3"
         )
       }
