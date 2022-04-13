@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.11.0a7-slim
 LABEL maintainer="Project Pluto"
 
 WORKDIR /usr/src/app
