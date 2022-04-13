@@ -15,6 +15,13 @@ pipeline {
             branch: 'main'
             }
         }
+        stage{
+            steps{
+                script{
+                    sh "pip3 install -r requirements.txt"
+                }
+            }
+        }
         stage('Snyk testing') {
       steps {
         echo 'Snyk vulnerability check...'
