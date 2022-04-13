@@ -15,6 +15,15 @@ pipeline {
             branch: 'main'
             }
         }
+        stage('Snyk testing') {
+      steps {
+        echo 'Snyk vulnerability check...'
+        snykSecurity(
+          snykInstallation: 'SnykLatest',
+          snykTokenId: 'snyk'
+        )
+      }
+    }
         stage('Package image'){
             steps{
                 script{
