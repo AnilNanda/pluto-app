@@ -18,13 +18,18 @@ pipeline {
         stage('SonarQube analysis') {
 		steps{
 			script{
-				def scannerHome = tool 'SonarRunner_3.3.0'
+				def scannerHome = tool 'sonarqube_4.7'
 			}
 			withSonarQubeEnv('sonarqube') {
 					sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=pluto -Dsonar.sources=."
 			}
 		}
-	}	
+	}
+    stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }	
         stage('Install pip requirements'){
             steps{
                 script{
