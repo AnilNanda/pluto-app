@@ -15,6 +15,16 @@ pipeline {
             branch: 'main'
             }
         }
+        stage('SonarQube analysis') {
+		steps{
+			script{
+				def scannerHome = tool 'SonarRunner_3.3.0'
+			}
+			withSonarQubeEnv('sonarqube') {
+					sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=pluto -Dsonar.sources=."
+			}
+		}
+	}	
         stage('Install pip requirements'){
             steps{
                 script{
