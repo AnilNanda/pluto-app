@@ -18,7 +18,7 @@ pipeline {
         stage('SonarQube analysis') {
 		steps{
 			script{
-				def scannerHome = tool 'sonarqube_4.7'
+				scannerHome = tool 'sonarqube'
 			}
 			withSonarQubeEnv('sonarqube') {
 					sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=pluto -Dsonar.sources=."
